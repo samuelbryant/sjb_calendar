@@ -7,7 +7,7 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
-import cal.experimental.fileio
+import sjb.cal.experimental.fileio
 
 import datetime
 
@@ -32,13 +32,13 @@ def get_credentials():
     Returns:
         Credentials, the obtained credential.
     """
-    credential_path = cal.experimental.fileio.get_credential_path()
+    credential_path = sjb.cal.experimental.fileio.get_credential_path()
     
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
         flow = client.flow_from_clientsecrets(
-            cal.experimental.fileio.get_client_secret_path(), SCOPES)
+            sjb.cal.experimental.fileio.get_client_secret_path(), SCOPES)
         flow.user_agent = APPLICATION_NAME
         if flags:
             credentials = tools.run_flow(flow, store, flags)
